@@ -12,7 +12,7 @@ int main(void)
     }
     else
     {
-        printf("Toto fait du vélo");
+        printf("Toto fait du velo");
     }
     return 0;
 }
