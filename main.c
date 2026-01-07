@@ -12,7 +12,7 @@ int main(void)
     }
     else
     {
-        printf("NEGATIF\n");
+        printf("NEGATIF");
     }
     return 0;
 }
