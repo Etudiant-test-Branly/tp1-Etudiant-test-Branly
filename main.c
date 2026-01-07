@@ -8,11 +8,11 @@ int main(void)
     /* TODO : test if / else */
     if (n>=0)
     {
-        printf("POSITIF");
+        printf("POSITIF\n");
     }
     else
     {
-        printf("Toto fait du velo");
+        printf("Toto fait du velo\n");
     }
     return 0;
 }
