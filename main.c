@@ -8,7 +8,7 @@ int main(void)
     /* TODO : test if / else */
     if (n>=0)
     {
-        printf("POSITIF c'est fou\n");
+        printf("POSITIF");
     }
     else
     {
