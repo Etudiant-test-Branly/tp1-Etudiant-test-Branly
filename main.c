@@ -7,8 +7,12 @@ int main(void)
 
     /* TODO : test if / else */
     if (n>=0)
-        {printf(POSITIF");}
+    {
+        printf("POSITIF");
+    }
     else
-        {printf("Toto fait du vélo");}
+    {
+        printf("Toto fait du vélo");
+    }
     return 0;
 }
