@@ -1,0 +1,52 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Compilation
+      id: compilation
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Compilation
+        setup-command: ''
+        command: gcc -std=c99 -Wall -Wextra main.c -o prog
+        timeout: 10
+        max-score: 2
+    - name: Test POSITIF
+      id: test-positif
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test POSITIF
+        setup-command: ''
+        command: result=$(echo 5 | ./prog | tr -d '\r\n ') [ "$result" = "POSITIF"
+          ]
+        timeout: 10
+        max-score: 4
+    - name: Test NEGATIF
+      id: test-negatif
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test NEGATIF
+        setup-command: ''
+        command: result=$(echo -3 | ./prog | tr -d '\r\n ') [ "$result" = "NEGATIF"
+          ]
+        timeout: 10
+        max-score: 4
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        COMPILATION_RESULTS: "${{steps.compilation.outputs.result}}"
+        TEST-POSITIF_RESULTS: "${{steps.test-positif.outputs.result}}"
+        TEST-NEGATIF_RESULTS: "${{steps.test-negatif.outputs.result}}"
+      with:
+        runners: compilation,test-positif,test-negatif
