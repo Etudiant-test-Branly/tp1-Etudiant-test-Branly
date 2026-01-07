@@ -28,8 +28,8 @@ jobs:
       with:
         test-name: Test POSITIF
         setup-command: ''
-        command: result=$(echo 5 | ./prog | tr -d '\r\n ') [ "$result" = "POSITIF"
-          ]
+        command: gcc -std=c99 -Wall -Wextra main.c -o prog result=$(echo 5 | ./prog
+          | tr -d '\r\n ') [ "$result" = "POSITIF" ]
         timeout: 10
         max-score: 4
     - name: Test NEGATIF
@@ -38,8 +38,8 @@ jobs:
       with:
         test-name: Test NEGATIF
         setup-command: ''
-        command: result=$(echo -3 | ./prog | tr -d '\r\n ') [ "$result" = "NEGATIF"
-          ]
+        command: gcc -std=c99 -Wall -Wextra main.c -o prog result=$(echo -3 | ./prog
+          | tr -d '\r\n ') [ "$result" = "NEGATIF" ]
         timeout: 10
         max-score: 4
     - name: Autograding Reporter
